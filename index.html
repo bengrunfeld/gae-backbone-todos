@@ -14,9 +14,9 @@
     <button class="submit"></button>
   </div>
 
-  <ul>
+  <ul class="todo-title">
     <script type="text/template" id="todo-item">
-        <li class="todo-title"><%= title %></li>
+        <li><%= title %></li>
     </script>
   </ul>
 
@@ -24,11 +24,10 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.13/backbone.localStorage-min.js"></script>
-  <script src="js/models/todo.js"></script>
-  <script src="js/collections/todos.js"></script>
-  <script src="js/views/todos.js"></script>
-  <script src="js/views/app.js"></script>
-  <script src="js/routers/router.js"></script>
+  <script src="js/models/todoModel.js"></script>
+  <script src="js/collections/todoCollection.js"></script>
+  <script src="js/views/todoView.js"></script>
+  <script src="js/routers/todoRouter.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

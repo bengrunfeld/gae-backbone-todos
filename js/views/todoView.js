@@ -4,7 +4,7 @@ var TodoView = Backbone.View.extend({
   template: _.template( $('#todo-item').html() ),
 
   render: function(){
-    var todo = this.tempalte(this.model.toJSON());
+    var todo = this.template(this.model.toJSON());
     this.$el.html(todo);
     return this;
   }
