@@ -7,12 +7,23 @@
   <link rel="stylesheet" href="assets/base.css">
 </head>
 <body>
-  <script type="text/template" id="item-template"></script>
-  <script type="text/template" id="stats-template"></script>
-  <script src="js/lib/jquery.min.js"></script>
-  <script src="js/lib/underscore-min.js"></script>
-  <script src="js/lib/backbone-min.js"></script>
-  <script src="js/lib/backbone.localStorage.js"></script>
+  <h1>Todos</h1>
+
+  <div class="todo-container">
+    <input class="todo-input" placeholder="Add a todo item">
+    <button class="submit"></button>
+  </div>
+
+  <ul>
+    <script type="text/template" id="todo-item">
+        <li class="todo-title"><%= title %></li>
+    </script>
+  </ul>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.13/backbone.localStorage-min.js"></script>
   <script src="js/models/todo.js"></script>
   <script src="js/collections/todos.js"></script>
   <script src="js/views/todos.js"></script>
