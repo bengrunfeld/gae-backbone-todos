@@ -11,13 +11,15 @@
 
   <div class="todo-container">
     <input class="todo-input" placeholder="Add a todo item">
-    <button class="submit"></button>
+    <button class="submit">Submit</button>
   </div>
 
   <ul class="todo-title">
-    <script type="text/template" id="todo-item">
-        <li><%= title %></li>
-    </script>
+    <div class="todo-li">
+      <script type="text/template" id="todo-item">
+          <li><%= title %></li>
+      </script>
+    </div>
   </ul>
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -26,6 +28,7 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.13/backbone.localStorage-min.js"></script>
   <script src="js/models/todoModel.js"></script>
   <script src="js/collections/todoCollection.js"></script>
+  <script src="js/views/itemView.js"></script>
   <script src="js/views/todoView.js"></script>
   <script src="js/routers/todoRouter.js"></script>
   <script src="js/app.js"></script>
