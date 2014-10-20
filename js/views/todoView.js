@@ -6,12 +6,8 @@ var TodoView = Backbone.View.extend({
     this.listenTo(todos, 'add', this.addOne);
   },
 
-  addOne: function(){
-    // print all model title in the collection
-    todos.forEach(function(thisModel){
-      var todo = new ItemView({model: thisModel});
-      $('.todo-title').append(todo.render().el);
-    });
-    return this;
+  addOne: function(thisModel){
+    var todo = new ItemView({model: thisModel, titles: titles});
+    $('.todo-title').append(todo.render().el);
   },
 });
