@@ -1,4 +1,5 @@
 var ItemView = Backbone.View.extend({
+
   template: _.template( $('#todo-item').html() ),
 
   render: function(){
