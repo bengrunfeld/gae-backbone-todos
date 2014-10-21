@@ -1,3 +1,3 @@
 # Backbone Todos
 
-A sample Backbone todos application
+A simple Backbone todos application.
