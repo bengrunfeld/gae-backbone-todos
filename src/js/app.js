@@ -5,9 +5,11 @@ $(function(){
   todos = new TodoCollection();
   var todoView = new TodoView();
 
-  function addRecord(event) {
+  // Set event handler to filter keypresses
+  $('.todo-input').on('keypress', addRecord);
 
-    // Check if enter/return key was pressed.
+  function addRecord(event) {
+    // If enter/return key wasn't pressed, bail
     if ( event.which !== 13 ) {
       return;
     }
@@ -21,7 +23,4 @@ $(function(){
     // Reset the input box for easier usage
     $('.todo-input').val('');
   }
-
-  // Set event handler to filter keypresses
-  $('.todo-input').on('keypress', addRecord);
 });
