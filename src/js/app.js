@@ -16,6 +16,7 @@ $(function(){
 
     // Create a new model using user input
     var todoModel = new TodoModel({title: $('.todo-input').val()});
+    todoModel.save();
 
     // Add new model to collection
     todos.add(todoModel);
