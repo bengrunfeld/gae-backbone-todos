@@ -48,6 +48,19 @@ def serialize_data(qry):
     return data 
 
 
+def initialize_headers(headers):
+    """Set up the headers for HTTP requests"""
+
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Headers'] = """Origin, 
+                                              X-Requested-With, 
+                                              Content-Type, 
+                                              Accept"""
+    headers['Content-Type'] = 'text/plain'
+
+    return headers
+
+
 class HandleOptions(webapp2.RequestHandler):
     def options(self):
         """GET /: Retrieve all todos"""
