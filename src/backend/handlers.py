@@ -48,10 +48,11 @@ def serialize_data(qry):
     return data 
 
 
-def initialize_headers(headers):
+def initialize_headers(headers, http_verb):
     """Set up the headers for HTTP requests"""
 
     headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Allow-Methods'] = http_verb 
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
     headers['Content-Type'] = 'text/plain'
 
@@ -62,101 +63,70 @@ class HandleOptions(webapp2.RequestHandler):
     def options(self):
         """GET /: Retrieve all todos"""
 
-        self.response.headers = initialize_headers(self.response.headers)
-        self.response.headers['Access-Control-Allow-Methods'] = 'OPTIONS'
+        self.response.headers = initialize_headers(self.response.headers, 'OPTIONS')
 
 
 class GetAllTodos(webapp2.RequestHandler):
     def get(self):
         """GET /: Retrieve all todos"""
 
-        try:
-            self.response.headers['Access-Control-Allow-Origin'] = '*'
-            self.response.headers['Access-Control-Allow-Headers'] = '*'
-            self.response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        self.response.headers = initialize_headers(self.response.headers, 'GET')
 
-            qry = TodoModel.query().fetch()
-            all_todos = serialize_data(qry)
+        qry = TodoModel.query().fetch()
+        all_todos = serialize_data(qry)
 
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write(json.dumps(all_todos, sort_keys=True, indent=4))
-        except:
-            # TODO: Improve this error 
-            raise Exception("Error: could not complete request")            
+        self.response.write(json.dumps(all_todos, sort_keys=True, indent=4))
 
 
 class GetTodo(webapp2.RequestHandler):
     def get(self, todo_id):
         """GET /<todo_id>: Retrieve a single todo"""
 
-        try:
-            self.response.headers['Access-Control-Allow-Origin'] = '*'
-            self.response.headers['Access-Control-Allow-Headers'] = '*'
-            self.response.headers['Access-Control-Allow-Methods'] = 'GET, OPTIONS'
+        self.response.headers = initialize_headers(self.response.headers, 'GET')
 
-            qry = ndb.Key('TodoModel', int(todo_id))
-            record = serialize_data(qry.get())
-            
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write(json.dumps(record, sort_keys=True, indent=4))
-        except:
-            raise Exception("Error: could not complete request")
-
+        qry = ndb.Key('TodoModel', int(todo_id))
+        record = serialize_data(qry.get())
+        
+        self.response.write(json.dumps(record, sort_keys=True, indent=4))
+        
 
 class CreateTodo(webapp2.RequestHandler):
     def post(self):
         """POST /: Create a single todo"""
 
-        try:
-            self.response.headers = initialize_headers(self.response.headers)
-            self.response.headers['Access-Control-Allow-Methods'] = 'POST'
+        self.response.headers = initialize_headers(self.response.headers, 'POST')
 
-            new_title = json.loads(self.request.body).get('title')
+        new_title = json.loads(self.request.body).get('title')
 
-            new_todo = TodoModel(title = new_title) 
-            key = new_todo.put()
+        new_todo = TodoModel(title = new_title) 
+        key = new_todo.put()
 
-            self.response.write('Successfully added new todo')
-        except:
-            raise Exception("Error: there was a problem")
+        self.response.write('Successfully added new todo')
 
 
 class UpdateTodo(webapp2.RequestHandler):
     def put(self, todo_id):
         """PUT /<todo_id>: Update a single todo""" 
         
-        try:
-            self.response.headers.add_header('Access-Control-Allow-Origin', '*')
-            self.response.headers.add_header('Access-Control-Allow-Headers',
-                                         'Origin, X-Requested-With, Content-Type, Accept')
-            self.response.headers.add_header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS')
-            self.response.headers.add_header('Content-Type', 'text/plain')
+        self.response.headers = initialize_headers(self.response.headers, 'UPDATE')
 
-            qry = ndb.Key('TodoModel', int(todo_id))
+        qry = ndb.Key('TodoModel', int(todo_id))
 
-            target = qry.get()
-            target.title = self.request.get('title')
-            target.put()
-            
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write('Record was updated')
-        except:
-            raise Exception("Error: could not complete request")
+        target = qry.get()
+        target.title = self.request.get('title')
+        target.put()
+        
+        self.response.write('Record was updated')
 
 
 class DeleteTodo(webapp2.RequestHandler):
     def delete(self, todo_id):
         """DELETE /<todo_id>: Delete a single todo"""
 
-        try:
-            self.response.headers['Access-Control-Allow-Origin'] = '*'
-            self.response.headers['Access-Control-Allow-Headers'] = '*'
-            self.response.headers['Access-Control-Allow-Methods'] = 'DELETE, OPTIONS'
+        self.response.headers = initialize_headers(self.response.headers, 'DELETE')
+       
+        qry = ndb.Key('TodoModel', int(todo_id))
+        qry.delete()
 
-            qry = ndb.Key('TodoModel', int(todo_id))
-            qry.delete()
+        self.response.write('{} was deleted'.format(todo_id))
 
-            self.response.headers['Content-Type'] = 'text/plain'
-            self.response.write('{} was deleted'.format(todo_id))
-        except:
-            raise Exception("Error: could not complete request")
