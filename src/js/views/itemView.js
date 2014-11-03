@@ -1,6 +1,6 @@
 var ItemView = Backbone.View.extend({
 
-  tagName: 'li',
+  tagName: 'input',
   className: 'todo-item',
 
   template: _.template( $('#todo-item').html() ),

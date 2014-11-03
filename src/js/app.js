@@ -9,6 +9,8 @@ $(function(){
   $('.todo-input').on('keypress', addRecord);
 
   function addRecord(event) {
+    // CREATE record in DB
+
     // If enter/return key wasn't pressed, bail
     if ( event.which !== 13 ) {
       return;
@@ -24,4 +26,6 @@ $(function(){
     // Reset the input box for easier usage
     $('.todo-input').val('');
   }
+
+
 });
