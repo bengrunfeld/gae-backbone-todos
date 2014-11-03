@@ -52,10 +52,7 @@ def initialize_headers(headers):
     """Set up the headers for HTTP requests"""
 
     headers['Access-Control-Allow-Origin'] = '*'
-    headers['Access-Control-Allow-Headers'] = """Origin, 
-                                              X-Requested-With, 
-                                              Content-Type, 
-                                              Accept"""
+    headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
     headers['Content-Type'] = 'text/plain'
 
     return headers
@@ -65,10 +62,8 @@ class HandleOptions(webapp2.RequestHandler):
     def options(self):
         """GET /: Retrieve all todos"""
 
-        self.response.headers['Access-Control-Allow-Origin'] = '*'
-        self.response.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
+        self.response.headers = initialize_headers(self.response.headers)
         self.response.headers['Access-Control-Allow-Methods'] = 'OPTIONS'
-        self.response.headers['Content-Type'] = 'text/plain'
 
 
 class GetAllTodos(webapp2.RequestHandler):
@@ -113,11 +108,8 @@ class CreateTodo(webapp2.RequestHandler):
         """POST /: Create a single todo"""
 
         try:
-            # TODO: If the headers fail, the rest of the code should not run!
-            self.response.headers['Access-Control-Allow-Origin'] = '*'
-            self.response.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
+            self.response.headers = initialize_headers(self.response.headers)
             self.response.headers['Access-Control-Allow-Methods'] = 'POST'
-            self.response.headers['Content-Type'] = 'text/plain'
 
             new_title = json.loads(self.request.body).get('title')
 
