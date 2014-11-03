@@ -1,6 +1,6 @@
 var ItemView = Backbone.View.extend({
 
-  tagName: 'input',
+  tagName: 'li',
   className: 'todo-item',
 
   template: _.template( $('#todo-item').html() ),
@@ -16,6 +16,7 @@ var ItemView = Backbone.View.extend({
   },
 
   removeElement: function() {
+    // DELETE in DB
     this.remove();
     this.unbind();
   },
