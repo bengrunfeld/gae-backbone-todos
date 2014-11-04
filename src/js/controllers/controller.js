@@ -1,4 +1,4 @@
-function addRecord(event) {
+function createRecord(event) {
   // CREATE record in DB
 
   // If enter/return key wasn't pressed, bail
@@ -8,7 +8,6 @@ function addRecord(event) {
 
   // Create a new model using user input
   var todoModel = new TodoModel({title: $('.todo-input').val()});
-  todoModel.save();
 
   // Add new model to collection
   todos.add(todoModel);
@@ -16,4 +15,3 @@ function addRecord(event) {
   // Reset the input box for easier usage
   $('.todo-input').val('');
 }
-

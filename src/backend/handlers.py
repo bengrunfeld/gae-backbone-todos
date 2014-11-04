@@ -17,9 +17,10 @@ def build_new_dict(data):
     """Build a new dict so that the data can be JSON serializable"""
 
     result = data.to_dict()
+    print result
     record = {}
 
-    # Populate the new dict with JSON serializiable values
+    # Make datetime objects JSON serializable 
     for key in result.iterkeys():
         if isinstance(result[key], datetime.datetime):
             record[key] = result[key].isoformat()
@@ -27,7 +28,7 @@ def build_new_dict(data):
         record[key] = result[key]
     
     # Add the key so that we have a reference to the record
-    record['key'] = data.key.id()
+    record['id'] = data.key.id()
 
     return record
         

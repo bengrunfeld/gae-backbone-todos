@@ -6,8 +6,5 @@ $(function(){
   var todoView = new TodoView();
 
   // Set event handler to filter keypresses
-  $('.todo-input').on('keypress', addRecord);
-
-
-
+  $('.todo-input').on('keypress', createRecord);
 });
