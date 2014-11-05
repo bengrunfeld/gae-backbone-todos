@@ -15,6 +15,11 @@ var ItemView = Backbone.View.extend({
     return this;
   },
 
+  save_to_db: function() {
+    var save_result = this.model.save();
+    console.log(save_result);
+  },
+
   removeElement: function() {
     // DELETE in DB
     this.remove();

@@ -9,7 +9,6 @@ function createRecord(event) {
   // Create a new model using user input
   var todoModel = new TodoModel({title: $('.todo-input').val()});
 
-
   // Add new model to collection
   todos.add(todoModel);
 
