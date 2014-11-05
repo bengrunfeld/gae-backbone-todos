@@ -24,22 +24,22 @@ app = webapp2.WSGIApplication([
                       name='get-all-todos',
                       methods=['GET']),
         # List one todo
-        webapp2.Route('/<todo_id>',
-                      handler=GetTodo,
-                      name='list-one-todo',
-                      methods=['GET']),
+#        webapp2.Route('/',
+#                      handler=GetTodo,
+#                      name='list-one-todo',
+#                      methods=['GET']),
         # Create a new todo
         webapp2.Route('/',
                       handler=CreateTodo,
                       name='create-todo',
                       methods=['POST']),
         # Update an existing todo
-        webapp2.Route('/<todo_id>',
+        webapp2.Route('/',
                       handler=UpdateTodo,
                       name='update-todo',
                       methods=['PUT']),
         # Delete an existing todo
-        webapp2.Route('/<todo_id>',
+        webapp2.Route('/',
                       handler=DeleteTodo,
                       name='delete-todo',
                       methods=['DELETE']),

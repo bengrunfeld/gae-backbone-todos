@@ -10,10 +10,8 @@ var ItemView = Backbone.View.extend({
   },
 
   render: function() {
-    this.model.save();
     var todo = this.template(this.model.toJSON());
     this.$el.html(todo);
-    console.log(this.model.isNew());
     return this;
   },
 

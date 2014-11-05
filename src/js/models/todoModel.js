@@ -1,7 +1,6 @@
 var TodoModel = Backbone.Model.extend({
 
   defaults: {
-    id: 0,
     title: 'default title'
   },
 
