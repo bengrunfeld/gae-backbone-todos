@@ -54,6 +54,7 @@ def initialize_headers(headers, http_verb):
 
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Methods'] = http_verb 
+    headers['Access-Control-Request-Method'] = http_verb
     headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
     headers['Content-Type'] = 'text/plain'
 
@@ -65,6 +66,9 @@ class HandleOptions(webapp2.RequestHandler):
         """GET /: Retrieve all todos"""
 
         self.response.headers = initialize_headers(self.response.headers, 'OPTIONS')
+
+        # HTTP DELETE requests come as a header with OPTIONS, so it needs to be set here
+        self.response.headers = initialize_headers(self.response.headers, 'DELETE')
 
 
 class GetAllTodos(webapp2.RequestHandler):
@@ -121,13 +125,15 @@ class UpdateTodo(webapp2.RequestHandler):
 
 
 class DeleteTodo(webapp2.RequestHandler):
-    def delete(self, todo_id):
+    def delete(self):
         """DELETE /<todo_id>: Delete a single todo"""
 
         self.response.headers = initialize_headers(self.response.headers, 'DELETE')
-       
-        qry = ndb.Key('TodoModel', int(todo_id))
-        qry.delete()
 
-        self.response.write('{} was deleted'.format(todo_id))
+        print '---------------->>>'
+        print self.request.get('model_id') 
+        #qry = ndb.Key('TodoModel', int(todo_id))
+        #qry.delete()
+
+        self.response.write('{} was deleted'.format('record'))
 
