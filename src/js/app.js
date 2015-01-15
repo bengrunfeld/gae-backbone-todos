@@ -6,7 +6,7 @@ $(function(){
   var todoView = new TodoView();
 
   // Populate the viewport with DB entries
-  //todos.fetch();
+  todos.fetch();
 
   // Set event handler to filter keypresses
   $('.todo-input').on('keypress', createRecord);

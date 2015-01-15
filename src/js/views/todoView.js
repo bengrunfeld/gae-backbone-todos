@@ -8,7 +8,7 @@ var TodoView = Backbone.View.extend({
 
   addOne: function(thisModel){
     // Render the model to screen
-    var todo = new ItemView({model: thisModel});
+    var todo = new ItemView({ model: thisModel });
     $('.todo-title').append(todo.render().el);
   },
 });
