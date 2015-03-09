@@ -61,6 +61,16 @@ def initialize_headers(headers, http_verb):
     return headers
 
 
+class HandleOptionsWithModel(webapp2.RequestHandler):
+    def options(self, model_id):
+        """GET /: Retrieve all todos"""
+
+        self.response.headers = initialize_headers(self.response.headers, 'OPTIONS')
+
+        # HTTP DELETE requests come as a header with OPTIONS, so it needs to be set here
+        self.response.headers = initialize_headers(self.response.headers, 'DELETE')
+
+
 class HandleOptions(webapp2.RequestHandler):
     def options(self):
         """GET /: Retrieve all todos"""
@@ -123,17 +133,21 @@ class UpdateTodo(webapp2.RequestHandler):
         
         self.response.write('Record was updated')
 
-
-class DeleteTodo(webapp2.RequestHandler):
+class CatchAnonDelete(webapp2.RequestHandler):
     def delete(self):
         """DELETE /<todo_id>: Delete a single todo"""
 
         self.response.headers = initialize_headers(self.response.headers, 'DELETE')
 
-        print '---------------->>>'
-        print self.request.get('model_id') 
-        #qry = ndb.Key('TodoModel', int(todo_id))
-        #qry.delete()
 
-        self.response.write('{} was deleted'.format('record'))
+class DeleteTodo(webapp2.RequestHandler):
+    def delete(self, model_id=None):
+        """DELETE /<model_id>: Delete a single todo"""
+
+        self.response.headers = initialize_headers(self.response.headers, 'DELETE')
+
+        qry = ndb.Key('TodoModel', int(model_id))
+        qry.delete()
+
+        self.response.write('{} was deleted'.format(model_id))
 

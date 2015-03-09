@@ -8,6 +8,7 @@ import webapp2
 from webapp2_extras import routes
 
 from config import config
+from handlers import HandleOptionsWithModel
 from handlers import HandleOptions
 from handlers import GetAllTodos
 from handlers import GetTodo
@@ -39,14 +40,21 @@ app = webapp2.WSGIApplication([
                       name='update-todo',
                       methods=['PUT']),
         # Delete an existing todo
-        webapp2.Route('/',
+                # Delete an existing todo
+        webapp2.Route('/<model_id>',
                       handler=DeleteTodo,
                       name='delete-todo',
                       methods=['DELETE']),
+        # Route a HTTP request that uses OPTIONS 
+        webapp2.Route('/<model_id>',
+                      handler=HandleOptionsWithModel,
+                      name='handle-rpc',
+                      methods=['OPTIONS']),
         # Route a HTTP request that uses OPTIONS 
         webapp2.Route('/',
                       handler=HandleOptions,
                       name='handle-rpc',
                       methods=['OPTIONS']),
+
     ]),
 ], config=config())
