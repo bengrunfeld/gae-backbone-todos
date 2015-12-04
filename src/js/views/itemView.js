@@ -17,17 +17,22 @@ var ItemView = Backbone.View.extend({
 
   save_to_db: function() {
     var save_result = this.model.save();
-    console.log(save_result);
   },
 
   removeElement: function() {
     // DELETE in DB
 
     // Shows that we have access to the model
-    console.log(this.model.toJSON());
+    // console.log();
+
+    // sends HTTP DELETE to /todos/2 and removes from collection
+    // console.log(this.model.toJSON);
+    // todo = todos.get(this.model.toJSON().id);
+    // console.log(todo);
+    this.model.destroy();
 
     // Sends a "DELETE" to the server, but does not append id to URL
-    this.model.destroy();
+    // this.model.destroy();
 
     this.remove();
     this.unbind();
