@@ -75,9 +75,6 @@ class HandleOptions(webapp2.RequestHandler):
     def options(self):
         """GET /: Retrieve all todos"""
 
-        print '------>>> handle options'
-        print self.response.headers
-
         self.response.headers = initialize_headers(self.response.headers, 'OPTIONS')
 
         # HTTP DELETE requests come as a header with OPTIONS, so it needs to be set here
@@ -140,16 +137,12 @@ class CatchAnonDelete(webapp2.RequestHandler):
     def delete(self):
         """DELETE /<todo_id>: Delete a single todo"""
 
-        print '------>>> anon delete'
-
         self.response.headers = initialize_headers(self.response.headers, 'DELETE')
 
 
 class DeleteTodo(webapp2.RequestHandler):
     def delete(self, model_id=None):
         """DELETE /<model_id>: Delete a single todo"""
-
-        print '------>>> delete todo'
 
         self.response.headers = initialize_headers(self.response.headers, 'DELETE')
 
